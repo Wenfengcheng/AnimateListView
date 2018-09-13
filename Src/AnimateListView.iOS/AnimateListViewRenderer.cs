@@ -12,6 +12,12 @@ namespace AnimateListView.iOS
 {
     public class AnimateListViewRenderer : ListViewRenderer
     {
+
+        public static void Initialize()
+        {
+
+        }
+
         protected override void OnElementChanged(ElementChangedEventArgs<ListView> e)
         {
             base.OnElementChanged(e);
@@ -21,7 +27,7 @@ namespace AnimateListView.iOS
                 var tableViewController = ((UITableViewController)ViewController);
                 
                 // add custom color view
-                if (list.IsPullToRefreshEnabled || list.EnableRefresh)
+                if (list.EnableRefresh)
                 {
                     UIView view = new UIView()
                     {
@@ -33,8 +39,9 @@ namespace AnimateListView.iOS
                 }
 
                 // custom origin refresh control color
-                if (list.IsPullToRefreshEnabled)
+                if (tableViewController.RefreshControl != null)
                 {
+                    Console.WriteLine("---------done-------------");
                     tableViewController.RefreshControl.TintColor = list.RefreshControlColor.ToUIColor();
                     tableViewController.View.BringSubviewToFront(((UITableViewController)ViewController).RefreshControl);
                 }
@@ -51,7 +58,7 @@ namespace AnimateListView.iOS
                     };
 
                     MJRefreshAutoNormalFooter footer = new MJRefreshAutoNormalFooter();
-                    footer.Hidden = true;
+                    //footer.Hidden = true;
                     tableViewController.TableView.SetFooter(footer);
                     footer.RefreshingBlock = () =>
                     {
@@ -64,6 +71,9 @@ namespace AnimateListView.iOS
                     header.ArrowView.TintColor = list.HeaderTintColor.ToUIColor();
 
                     footer.StateLabel.TextColor = list.HeaderTintColor.ToUIColor();
+
+                    tableViewController.TableView.BringSubviewToFront(header);
+                    tableViewController.TableView.BringSubviewToFront(footer);
                 }
             }
         }

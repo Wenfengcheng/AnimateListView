@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:ExampleApp"
+             xmlns:control="clr-namespace:AnimateListView.Shared;assembly=AnimateListView.Shared"
+             x:Class="ExampleApp.MainPage">
+    <control:AnimationListView x:Name="list" IsPullToRefreshEnabled="false" EnableRefresh="true" RefreshCommand="{Binding PullRefreshCommand}" 
+                               LoadMoreCommand="{Binding LoadMoreCommand}" HeaderTintColor="Black" RefreshControlColor="Red" Footer="">
+        <control:AnimationListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding .}" TextColor="Blue"/>
+            </DataTemplate>
+        </control:AnimationListView.ItemTemplate>    
+    </control:AnimationListView>
+</ContentPage>

@@ -16,6 +16,11 @@ namespace AnimateListView.Droid
 
         }
 
+        public static void Initialize()
+        {
+
+        }
+
         protected override void OnElementChanged(ElementChangedEventArgs<ListView> e)
         {
             base.OnElementChanged(e);
